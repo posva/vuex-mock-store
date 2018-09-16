@@ -11,9 +11,7 @@ export default class Store {
       {},
       {
         // always return the root store as the context module
-        get: (target, prop) => ({
-          context: this,
-        }),
+        get: () => ({ context: this }),
       }
     )
   }
