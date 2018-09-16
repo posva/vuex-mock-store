@@ -2,7 +2,7 @@
 
 > Simple and straightforward mock for Vuex v3.x Store
 
-Demo (TODO link)
+Supports using `mapMutations` and `mapActions` as well as directly doing `this.$store.commit()` and `this.$store.dispatch()`
 
 ## Installation
 
@@ -14,9 +14,98 @@ yarn add -D vuex-mock-store
 
 ## Usage
 
+Usage with [vue-test-utils](https://github.com/vuejs/vue-test-utils):
+
+```js
+import { Store } from 'vuex-mock-store'
+import { mount } from '@vue/test-utils'
+import MyComponent from '@/components/MyComponent.vue'
+
+// create the Store mock
+const store = new Store()
+// add other mocks here so they are accessible in every component
+const mocks = {
+  $store: store,
+}
+
+// reset spies, initial state and getters
+afterEach(() => store.reset())
+
+describe('MyComponent.vue', () => {
+  let wrapper
+  beforeEach(() => {
+    wrapper = mount(MyComponent, { mocks })
+  })
+
+  it('commits init on creation', () => {
+    expect(store.commit).toHaveBeenCalledOnce()
+    expect(store.commit).toHaveBeenCalledWith('init')
+  })
+
+  it('dispatch save when clicking button', () => {
+    wrapper.find('button.save').trigger('click')
+    expect(store.dispatch).toHaveBeenCalledOnce()
+    expect(store.dispatch).toHaveBeenCalledWith('save', { name: 'Eduardo' })
+  })
+})
+```
+
+You can provide a `getters`, and `state` object to mock them:
+
+```js
+const store = new Store({
+  getters: {
+    name: () => 'Eduardo',
+  },
+  state: {
+    counter: 0,
+  },
+})
+```
+
+You can [modify](#state) the `state` and `getters` directly for any test. Calling `store.reset()` will reset them to the initial values provided.
+
 ## API
 
+### `Store` class
+
+#### `constructor(options)`
+
+- `options`
+  - `state`: initial state object, _default_: `{}`
+  - `getters`: getters object, _default_: `{}`
+
+#### `state`
+
+Store state. You can directly modify it to change state:
+
+```js
+store.state.name = 'Jeff'
+```
+
+#### `getters`
+
+Store getters. You can directly modify it to change the returned value by a getter:
+
+```js
+store.getters.upperCaseName = state => 'JEFF'
+```
+
+#### `reset`
+
+Reset `commit` and `dispatch` spies and restore `getters` and `state` to their initial values
+
+### `commit` & `dispatch`
+
+Spies. Dependent on the testing framework
+
+- [jest.fn]()
+- [sinon.spy]()
+
 ## Related
+
+- [vue-test-utils](https://github.com/vuejs/vue-test-utils)
+- [vuex](https://github.com/vuejs/vuex)
 
 ## License
 
