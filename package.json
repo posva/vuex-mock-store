@@ -1,0 +1,58 @@
+{
+  "name": "vuex-mock-store",
+  "version": "0.0.0",
+  "description": "Some awesome description",
+  "main": "src/index.js",
+  "author": {
+    "name": "Eduardo San Martin Morote",
+    "email": "posva13@gmail.com"
+  },
+  "scripts": {
+    "lint": "eslint --color --ext=js,html src test",
+    "unit": "jest",
+    "dev": "npm run unit -- --watchAll",
+    "test": "npm run lint && npm run unit",
+    "prepublishOnly": "rollit"
+  },
+  "files": [
+    "src",
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [],
+  "license": "MIT",
+  "devDependencies": {
+    "babel-jest": "^23.0.1",
+    "babel-preset-env": "^1.7.0",
+    "codecov": "^3.0.2",
+    "eslint": "^5.0.0",
+    "eslint-config-posva": "^2.0.0",
+    "jest": "^23.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/posva/vuex-mock-store.git"
+  },
+  "bugs": {
+    "url": "https://github.com/posva/vuex-mock-store/issues"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+    },
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/test/*.js",
+      "<rootDir>/test/.*.js",
+      "<rootDir>/test/*/*.js"
+    ]
+  },
+  "homepage": "https://github.com/posva/vuex-mock-store#readme"
+}
