@@ -1,10 +1,10 @@
 import clone from 'lodash.clone'
 
 export default class Store {
-  constructor({ getters = {}, state = {} } = {}) {
+  constructor ({ getters = {}, state = {} } = {}) {
     this.dispatch = jest.fn()
     this.commit = jest.fn()
-    this.getters = this.__initialGetters = getters
+    this.getters = { ...(this.__initialGetters = getters) }
     this.state = clone((this.__initialState = state))
     // this is necessary for map* helpers
     this._modulesNamespaceMap = new Proxy(
@@ -16,10 +16,10 @@ export default class Store {
     )
   }
 
-  reset() {
+  reset () {
     this.dispatch.mockReset()
     this.commit.mockReset()
-    this.getters = this.__initialGetters
+    this.getters = { ...(this.__initialGetters) }
     this.state = clone(this.__initialState)
   }
 }
