@@ -1,6 +1,6 @@
-import clone from 'lodash.clone'
+const clone = require('lodash.clonedeep')
 
-export default class Store {
+exports.Store = class Store {
   constructor ({ getters = {}, state = {} } = {}) {
     this.dispatch = jest.fn()
     this.commit = jest.fn()
@@ -19,7 +19,7 @@ export default class Store {
   reset () {
     this.dispatch.mockReset()
     this.commit.mockReset()
-    this.getters = { ...(this.__initialGetters) }
+    this.getters = { ...this.__initialGetters }
     this.state = clone(this.__initialState)
   }
 }

@@ -61,5 +61,8 @@
       "<rootDir>/test/*/*.js"
     ]
   },
-  "homepage": "https://github.com/posva/vuex-mock-store#readme"
+  "homepage": "https://github.com/posva/vuex-mock-store#readme",
+  "dependencies": {
+    "lodash.clonedeep": "^4.5.0"
+  }
 }
