@@ -1,7 +1,7 @@
 {
   "name": "vuex-mock-store",
   "version": "0.0.0",
-  "description": "Some awesome description",
+  "description": "Simple and straightforward mock for Vuex v3.x Store",
   "main": "src/index.js",
   "author": {
     "name": "Eduardo San Martin Morote",
@@ -11,16 +11,26 @@
     "lint": "eslint --color --ext=js,html src test",
     "unit": "jest",
     "dev": "npm run unit -- --watchAll",
-    "test": "npm run lint && npm run unit",
-    "prepublishOnly": "rollit"
+    "test": "npm run lint && npm run unit"
   },
   "files": [
     "src",
-    "dist",
     "LICENSE",
     "README.md"
   ],
-  "keywords": [],
+  "keywords": [
+    "vue",
+    "test",
+    "utils",
+    "test-utils",
+    "store",
+    "vuex",
+    "mock",
+    "vuex-mock",
+    "vuex-store-mock",
+    "jest",
+    "vuex-mock-store"
+  ],
   "license": "MIT",
   "devDependencies": {
     "babel-jest": "^23.0.1",
@@ -45,8 +55,7 @@
       "vue"
     ],
     "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
-      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
     },
     "coveragePathIgnorePatterns": [
       "<rootDir>/test/*.js",
