@@ -14,6 +14,8 @@ yarn add -D vuex-mock-store
 
 ## Usage
 
+ℹ️: _All examples use [Jest](#TODO) API_
+
 Usage with [vue-test-utils](https://github.com/vuejs/vue-test-utils):
 
 ```js
@@ -50,6 +52,8 @@ describe('MyComponent.vue', () => {
 })
 ```
 
+### Initial state and getters
+
 You can provide a `getters`, and `state` object to mock them:
 
 ```js
@@ -62,6 +66,34 @@ const store = new Store({
   },
 })
 ```
+
+### Modules
+
+To mock modules `state`, simply provide a nested object for `state`:
+
+```js
+new Store({
+  state: {
+    moduleA: {
+      moduleC: {
+        value: 'foo',
+      },
+    },
+    moduleB: {
+      value: 'bar',
+    },
+  },
+})
+```
+
+Testing actions and mutations depend whether your [modules are namespaced](#TODO) or not. If they are namespaced, make sure to provide the full action/mutation name:
+
+```js
+expect(store.commit).toHaveBeenCalledWith('moduleA/setValue')
+expect(store.dispatch).toHaveBeenCalledWith('moduleA/postValue')
+```
+
+### Mutating `state`, providing custom `getters`
 
 You can [modify](#state) the `state` and `getters` directly for any test. Calling `store.reset()` will reset them to the initial values provided.
 
