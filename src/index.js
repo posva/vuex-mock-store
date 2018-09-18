@@ -7,8 +7,9 @@ exports.Store = class Store {
   constructor ({ getters = {}, state = {} } = {}) {
     this.dispatch = jest.fn()
     this.commit = jest.fn()
-    this.getters = { ...(this.__initialGetters = getters) }
-    this.state = clone((this.__initialState = state))
+    this.__initialGetters = getters
+    this.__initialState = state
+    this._initialize()
     // this is necessary for map* helpers
     this._modulesNamespaceMap = new Proxy(
       {},
@@ -46,10 +47,14 @@ exports.Store = class Store {
     )
   }
 
+  _initialize () {
+    this.getters = { ...this.__initialGetters }
+    this.state = clone(this.__initialState)
+  }
+
   reset () {
     this.dispatch.mockReset()
     this.commit.mockReset()
-    this.getters = { ...this.__initialGetters }
-    this.state = clone(this.__initialState)
+    this._initialize()
   }
 }
