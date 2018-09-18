@@ -56,7 +56,7 @@ describe('Store Mock', () => {
         getters: {
           getter: 1,
           // getter: (...args) => (console.log(...args), 1),
-          'mdolue/mGetter': (...args) => (console.log(...args), 2),
+          'mdolue/mGetter': (...args) => console.log(...args) || 2,
         },
       }),
     }
