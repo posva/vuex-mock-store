@@ -1,7 +1,6 @@
 const clone = require('lodash.clonedeep')
 
 // TODO: support functions in getters by using a Proxy
-// TODO: refactor creation code
 
 exports.Store = class Store {
   constructor ({ getters = {}, state = {} } = {}) {

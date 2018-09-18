@@ -59,7 +59,7 @@ You can provide a `getters`, and `state` object to mock them:
 ```js
 const store = new Store({
   getters: {
-    name: () => 'Eduardo',
+    name: 'Eduardo',
   },
   state: {
     counter: 0,
@@ -121,16 +121,10 @@ store.state.name = 'Jeff'
 
 #### `getters`
 
-Store getters. You can directly modify it (as an object) to change the value:
+Store getters. You can directly modify it to change a value:
 
 ```js
 store.getters.upperCaseName = 'JEFF'
-```
-
-You can also provide a function to "mock" the getter implementation based on the state:
-
-```js
-store.getters.upperCaseName = state => state.name.toUpperCase()
 ```
 
 #### `reset`
