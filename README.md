@@ -121,10 +121,16 @@ store.state.name = 'Jeff'
 
 #### `getters`
 
-Store getters. You can directly modify it to change the returned value by a getter:
+Store getters. You can directly modify it (as an object) to change the value:
 
 ```js
-store.getters.upperCaseName = state => 'JEFF'
+store.getters.upperCaseName = 'JEFF'
+```
+
+You can also provide a function to "mock" the getter implementation based on the state:
+
+```js
+store.getters.upperCaseName = state => state.name.toUpperCase()
 ```
 
 #### `reset`
