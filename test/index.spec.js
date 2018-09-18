@@ -23,16 +23,20 @@ describe('Store Mock', () => {
     expect(store.getters).toEqual(getters)
   })
 
+  it('resets getters', () => {
+    const getters = { n: 0 }
+    const store = new Store({ getters })
+    store.getters.n = 3
+    store.reset()
+    expect(store.getters.n).toBe(0)
+  })
+
   it('resets the state', () => {
     const state = { n: 0 }
-    const store = new Store({
-      state,
-    })
+    const store = new Store({ state })
 
     store.state.n = 3
-
     store.reset()
-
     expect(store.state.n).toBe(0)
   })
 
@@ -60,8 +64,6 @@ describe('Store Mock', () => {
       }).not.toThrow()
       expect(wrapper.vm.counter).toBe(0)
       expect(wrapper.vm.mCounter).toBe(1)
-      console.log('value', wrapper.vm.mCounter)
-      console.log('value', wrapper.vm.mmCounter)
       expect(wrapper.vm.mmCounter).toBe(3)
 
       expect(wrapper.vm.getter).toBe(1)
