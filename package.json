@@ -1,6 +1,6 @@
 {
   "name": "vuex-mock-store",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Simple and straightforward mock for Vuex v3.x Store",
   "main": "src/index.js",
   "author": {
