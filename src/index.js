@@ -11,7 +11,34 @@ exports.Store = class Store {
       {},
       {
         // always return the root store as the context module
-        get: () => ({ context: this }),
+        get: (target, key) => {
+          if (typeof key !== 'string') return Reflect.get(this, key)
+
+          const modules = key.split('/')
+          // modules always have a trailing /
+          if (modules.length > 1) {
+            // remove trailing empty module
+            modules.pop()
+            // get the nested state corresponding to the module
+            let state = this.state
+            for (let module of modules) {
+              if (state[module]) state = state[module]
+              else {
+                throw new Error(`[vuex-mock-store] module ${key} not defined in state:`, this.state)
+              }
+            }
+
+            return {
+              context: {
+                _modulesNamespaceMap: this._modulesNamespaceMap,
+                state,
+                getters: this.getters,
+              },
+            }
+          } else {
+            return Reflect.get(this, key)
+          }
+        },
       }
     )
   }

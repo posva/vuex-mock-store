@@ -80,6 +80,12 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@vue/test-utils@^1.0.0-beta.25":
+  version "1.0.0-beta.25"
+  resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-1.0.0-beta.25.tgz#4703076de3076bac42cdd242cd53e6fb8752ed8c"
+  dependencies:
+    lodash "^4.17.4"
+
 abab@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.0.tgz#aba0ab4c5eee2d4c79d3487d85450fb2376ebb0f"
@@ -734,6 +740,10 @@ data-urls@^1.0.0:
     abab "^2.0.0"
     whatwg-mimetype "^2.1.0"
     whatwg-url "^7.0.0"
+
+de-indent@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/de-indent/-/de-indent-1.0.2.tgz#b2038e846dc33baa5796128d0804b455b8c1e21d"
 
 debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
@@ -1476,6 +1486,10 @@ has@^1.0.1:
   resolved "https://registry.yarnpkg.com/has/-/has-1.0.3.tgz#722d7cbfc1f6aa8241f16dd814e011e1f41e8796"
   dependencies:
     function-bind "^1.1.1"
+
+he@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
 home-or-tmp@^2.0.0:
   version "2.0.0"
@@ -3593,6 +3607,21 @@ vue-eslint-parser@^3.2.1:
     espree "^4.0.0"
     esquery "^1.0.1"
     lodash "^4.17.10"
+
+vue-template-compiler@^2.5.17:
+  version "2.5.17"
+  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.5.17.tgz#52a4a078c327deb937482a509ae85c06f346c3cb"
+  dependencies:
+    de-indent "^1.0.2"
+    he "^1.1.0"
+
+vue@^2.5.17:
+  version "2.5.17"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
+
+vuex@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.0.1.tgz#e761352ebe0af537d4bb755a9b9dc4be3df7efd2"
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"

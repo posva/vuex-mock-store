@@ -89,8 +89,12 @@ new Store({
 Testing actions and mutations depend whether your [modules are namespaced](#TODO) or not. If they are namespaced, make sure to provide the full action/mutation name:
 
 ```js
+// namespaced module
 expect(store.commit).toHaveBeenCalledWith('moduleA/setValue')
 expect(store.dispatch).toHaveBeenCalledWith('moduleA/postValue')
+// non-namespaced
+expect(store.commit).toHaveBeenCalledWith('setValue')
+expect(store.dispatch).toHaveBeenCalledWith('postValue')
 ```
 
 ### Mutating `state`, providing custom `getters`
@@ -131,8 +135,8 @@ Reset `commit` and `dispatch` spies and restore `getters` and `state` to their i
 
 Spies. Dependent on the testing framework
 
-- [jest.fn]()
-- [sinon.spy]()
+- [jest.fn](#TODO)
+- [sinon.spy](#TODO)
 
 ## Related
 

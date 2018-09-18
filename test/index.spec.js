@@ -1,4 +1,6 @@
 const { Store } = require('../src')
+const Helper = require('./Helper')
+const { mount } = require('@vue/test-utils')
 
 describe('Store Mock', () => {
   it('copies the state', () => {
@@ -9,5 +11,60 @@ describe('Store Mock', () => {
 
     expect(store.state).not.toBe(state)
     expect(store.state).toEqual(state)
+  })
+
+  it('copies getters', () => {
+    const getters = { getter: 0 }
+    const store = new Store({
+      getters,
+    })
+
+    expect(store.getters).not.toBe(getters)
+    expect(store.getters).toEqual(getters)
+  })
+
+  it('resets the state', () => {
+    const state = { n: 0 }
+    const store = new Store({
+      state,
+    })
+
+    store.state.n = 3
+
+    store.reset()
+
+    expect(store.state.n).toBe(0)
+  })
+
+  describe('using Helper', () => {
+    const mocks = {
+      $store: new Store({
+        state: {
+          counter: 0,
+          module: { mCounter: 1, nested: { mmCounter: 3 } },
+        },
+
+        getters: {
+          getter: 1,
+          // getter: (...args) => (console.log(...args), 1),
+          'mdolue/mGetter': (...args) => (console.log(...args), 2),
+        },
+      }),
+    }
+
+    it('works', () => {
+      /** @type {import('@vue/test-utils').Wrapper<Helper>} */
+      let wrapper
+      expect(() => {
+        wrapper = mount(Helper, { mocks })
+      }).not.toThrow()
+      expect(wrapper.vm.counter).toBe(0)
+      expect(wrapper.vm.mCounter).toBe(1)
+      console.log('value', wrapper.vm.mCounter)
+      console.log('value', wrapper.vm.mmCounter)
+      expect(wrapper.vm.mmCounter).toBe(3)
+
+      expect(wrapper.vm.getter).toBe(1)
+    })
   })
 })
