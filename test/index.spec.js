@@ -5,19 +5,23 @@ const { mount } = require('@vue/test-utils')
 describe('Store Mock', () => {
   it('copies the state', () => {
     const state = { n: 0 }
-    const store = new Store({
-      state,
-    })
+    const store = new Store({ state })
 
     expect(store.state).not.toBe(state)
     expect(store.state).toEqual(state)
   })
 
+  it('deeply copies the state', () => {
+    const state = { nested: { n: 0 } }
+    const store = new Store({ state })
+
+    expect(store.state.nested).not.toBe(state.nested)
+    expect(store.state.nested).toEqual(state.nested)
+  })
+
   it('copies getters', () => {
     const getters = { getter: 0 }
-    const store = new Store({
-      getters,
-    })
+    const store = new Store({ getters })
 
     expect(store.getters).not.toBe(getters)
     expect(store.getters).toEqual(getters)
