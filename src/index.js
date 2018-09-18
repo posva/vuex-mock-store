@@ -27,7 +27,10 @@ exports.Store = class Store {
             for (let module of modules) {
               if (state[module]) state = state[module]
               else {
-                throw new Error(`[vuex-mock-store] module ${key} not defined in state:`, this.state)
+                throw new Error(
+                  `[vuex-mock-store] module "${key.slice(0, -1)}" not defined in state:`,
+                  this.state
+                )
               }
             }
 

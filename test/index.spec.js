@@ -1,6 +1,7 @@
 const { Store } = require('../src')
 const Helper = require('./Helper')
 const { mount } = require('@vue/test-utils')
+const { mapState } = require('vuex')
 
 describe('Store Mock', () => {
   it('copies the state', () => {
@@ -71,6 +72,21 @@ describe('Store Mock', () => {
       expect(wrapper.vm.mmCounter).toBe(3)
 
       expect(wrapper.vm.getter).toBe(1)
+    })
+
+    it('throws with non-defined state', () => {
+      /** @type {import('@vue/test-utils').Wrapper<Helper>} */
+      let wrapper = mount(
+        {
+          render: () => null,
+          computed: mapState('nonExistent', ['a']),
+        },
+        { mocks }
+      )
+      expect(() => {
+        // eslint-disable-next-line no-unused-expressions
+        wrapper.vm.a
+      }).toThrow(/module "nonExistent" not defined in state/)
     })
   })
 })
