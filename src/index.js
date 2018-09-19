@@ -1,7 +1,5 @@
 const clone = require('lodash.clonedeep')
 
-// TODO: support functions in getters by using a Proxy
-
 const spy = {
   create: () => jest.fn(),
   reset: spy => spy.mockReset(),
