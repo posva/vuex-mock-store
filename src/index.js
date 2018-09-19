@@ -1,3 +1,4 @@
+// @ts-check
 const clone = require('lodash.clonedeep')
 
 const spy = {
@@ -33,8 +34,10 @@ exports.Store = class Store {
               if (state[module]) state = state[module]
               else {
                 throw new Error(
-                  `[vuex-mock-store] module "${key.slice(0, -1)}" not defined in state:`,
-                  this.state
+                  `[vuex-mock-store] module "${key.slice(
+                    0,
+                    -1
+                  )}" not defined in state:\n${JSON.stringify(this.state, null, 2)}`
                 )
               }
             }
