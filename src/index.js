@@ -2,10 +2,17 @@ const clone = require('lodash.clonedeep')
 
 // TODO: support functions in getters by using a Proxy
 
+const spy = {
+  create: () => jest.fn(),
+  reset: spy => spy.mockReset(),
+}
+
+exports.spy = spy
+
 exports.Store = class Store {
   constructor ({ getters = {}, state = {} } = {}) {
-    this.dispatch = jest.fn()
-    this.commit = jest.fn()
+    this.commit = spy.create()
+    this.dispatch = spy.create()
     this.__initialGetters = getters
     this.__initialState = state
     this._initialize()
@@ -55,8 +62,8 @@ exports.Store = class Store {
   }
 
   reset () {
-    this.dispatch.mockReset()
-    this.commit.mockReset()
+    spy.reset(this.dispatch)
+    spy.reset(this.commit)
     this._initialize()
   }
 }
