@@ -4,6 +4,15 @@ const { mount } = require('@vue/test-utils')
 const { mapState } = require('vuex')
 
 describe('Store Mock', () => {
+  it('work with no args', () => {
+    let store
+    expect(() => {
+      store = new Store()
+    }).not.toThrow()
+    expect(store.state).toEqual({})
+    expect(store.getters).toEqual({})
+  })
+
   it('copies the state', () => {
     const state = { n: 0 }
     const store = new Store({ state })
