@@ -1,4 +1,4 @@
-import { Mock } from 'jest'
+import 'jest'
 
 type Dict = Record<string, any>
 
@@ -13,7 +13,7 @@ interface StoreConstructorOptions<S extends Dict, G extends Dict, Spy> {
   spy?: SpyCreator<Spy>
 }
 
-export class Store<S extends Dict, G extends Dict, Spy = jest.Mock> {
+export class Store<S extends Dict = {}, G extends Dict = {}, Spy = jest.Mock> {
   commit: Spy
   dispatch: Spy
   state: S
