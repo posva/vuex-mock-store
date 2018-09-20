@@ -1,21 +1,26 @@
 // @ts-check
 const clone = require('lodash.clonedeep')
 
-const spy = {
+const defaultSpy = {
   create: () => jest.fn(),
+  /**
+   * @param {jest.Mock} spy
+   */
   reset: spy => spy.mockReset(),
 }
 
-exports.spy = spy
+exports.spy = defaultSpy
 
 exports.Store = class Store {
-  constructor ({ getters = {}, state = {} } = {}) {
-    this.commit = spy.create()
-    this.dispatch = spy.create()
-    this.__initialGetters = getters
-    this.__initialState = state
+  constructor ({ getters = {}, state = {}, spy = defaultSpy } = {}) {
+    this._spy = spy
+    this.commit = this._spy.create()
+    this.dispatch = this._spy.create()
+    this._initialGetters = getters
+    this._initialState = state
     this._initialize()
     // this is necessary for map* helpers
+    /** @type {any} */
     this._modulesNamespaceMap = new Proxy(
       {},
       {
@@ -62,13 +67,13 @@ exports.Store = class Store {
 
   _initialize () {
     // getters is a plain object
-    this.getters = { ...this.__initialGetters }
-    this.state = clone(this.__initialState)
+    this.getters = { ...this._initialGetters }
+    this.state = clone(this._initialState)
   }
 
   reset () {
-    spy.reset(this.dispatch)
-    spy.reset(this.commit)
+    this._spy.reset(this.dispatch)
+    this._spy.reset(this.commit)
     this._initialize()
   }
 }
