@@ -14,7 +14,7 @@ yarn add -D vuex-mock-store
 
 ## Usage
 
-ℹ️: _All examples use [Jest](#TODO) API_
+ℹ️: _All examples use [Jest](#TODO) API_. See [below](#Providing-custom-spies) to use a different mock library.
 
 Usage with [vue-test-utils](https://github.com/vuejs/vue-test-utils):
 
@@ -86,7 +86,7 @@ new Store({
 })
 ```
 
-Testing actions and mutations depend whether your [modules are namespaced](#TODO) or not. If they are namespaced, make sure to provide the full action/mutation name:
+Testing actions and mutations depend whether your [modules are namespaced](https://vuex.vuejs.org/guide/modules.html#namespacing) or not. If they are namespaced, make sure to provide the full action/mutation name:
 
 ```js
 // namespaced module
@@ -99,7 +99,7 @@ expect(store.dispatch).toHaveBeenCalledWith('postValue')
 
 ### Mutating `state`, providing custom `getters`
 
-You can [modify](#state) the `state` and `getters` directly for any test. Calling `store.reset()` will reset them to the initial values provided.
+You can [modify](#state) the `state` and `getters` directly for any test. Calling [`store.reset()`](#reset) will reset them to the initial values provided.
 
 ## API
 
@@ -110,6 +110,7 @@ You can [modify](#state) the `state` and `getters` directly for any test. Callin
 - `options`
   - `state`: initial state object, _default_: `{}`
   - `getters`: getters object, _default_: `{}`
+  - `spy`: interface to create spies. [details below](#Providing-custom-spies)
 
 #### `state`
 
@@ -131,12 +132,38 @@ store.getters.upperCaseName = 'JEFF'
 
 Reset `commit` and `dispatch` spies and restore `getters` and `state` to their initial values
 
+#### Providing custom spies
+
+By default, the Store will call `jest.fn()` to create the spies. This will throw an error if you are using `mocha` or any other test framework that isn't Jest. In that situation, you will have to provide an interface to _create_ and _reset_ spies. This is the default interface that uses `jest.fn()`:
+
+```js
+new Store({
+  spy: {
+    create: () => jest.fn(),
+    reset: spy => spy.mockRestore(),
+  },
+})
+```
+
+If you use Jest, you don't need to do anything.
+If you are using something else like [Sinon](https://sinonjs.org), you could provide this interface:
+
+```js
+import sinon from 'sinon'
+
+new Store({
+  spy: {
+    create: () => sinon.spy(),
+    reset: spy => spy.restore(),
+  },
+})
+
 ### `commit` & `dispatch`
 
 Spies. Dependent on the testing framework
 
-- [jest.fn](#TODO)
-- [sinon.spy](#TODO)
+- [jest.fn](#https://jestjs.io/docs/en/mock-function-api)
+- [sinon.spy](https://sinonjs.org/releases/v6.3.4/spies)
 
 ## Related
 
@@ -146,3 +173,4 @@ Spies. Dependent on the testing framework
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
+```
