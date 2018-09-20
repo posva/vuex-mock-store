@@ -7,8 +7,6 @@ interface SpyCreator<S> {
   reset: (spy: S) => any
 }
 
-type DefaultSpyCreator = SpyCreator<jest.Mock>
-
 interface StoreConstructorOptions<S extends Dict, G extends Dict, Spy> {
   getters?: G
   state?: S
@@ -30,10 +28,3 @@ export class Store<S extends Dict, G extends Dict, Spy = jest.Mock> {
   reset(): void
   private _initialize(): void
 }
-
-// interface StoreInstance<Spy, S extends Dict, G extends Dict> {
-// }
-
-// export interface Store<Spy, State extends Dict, Getters extends Dict> {
-//   new (options: StoreConstructorOptions<Spy, State, Getters>): StoreInstance<Spy, State, Getters>
-// }
