@@ -18,13 +18,46 @@ yarn add -D vuex-mock-store
 
 Usage with [vue-test-utils](https://github.com/vuejs/vue-test-utils):
 
+Given a component `MyComponent.vue`:
+
+```vue
+<template>
+  <div>
+    <p class="count">{{ count }}</p>
+    <p class="doubleCount">{{ doubleCount }}</p>
+    <button class="increment" @click="increment">+</button>
+    <button class="decrement" @click="decrement">-</button>
+    <hr/>
+    <button class="save" @click="save({ count })">Save</button>
+  </div>
+</template>
+
+<script>
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
+
+export default {
+  computed: {
+    ...mapState(['count']),
+    ...mapGetters(['doubleCount']),
+  },
+  methods: {
+    ...mapMutations(['increment', 'decrement']),
+    ...mapActions(['save']),
+  },
+}
+</script>
+```
+
 ```js
 import { Store } from 'vuex-mock-store'
 import { mount } from '@vue/test-utils'
 import MyComponent from '@/components/MyComponent.vue'
 
 // create the Store mock
-const store = new Store()
+const store = new Store({
+  state: { count: 0 },
+  getters: { doubleCount: 0 },
+})
 // add other mocks here so they are accessible in every component
 const mocks = {
   $store: store,
@@ -39,15 +72,16 @@ describe('MyComponent.vue', () => {
     wrapper = mount(MyComponent, { mocks })
   })
 
-  it('commits init on creation', () => {
+  it('calls increment', () => {
+    wrapper.find('button.increment').trigger('click')
     expect(store.commit).toHaveBeenCalledOnce()
-    expect(store.commit).toHaveBeenCalledWith('init')
+    expect(store.commit).toHaveBeenCalledWith('increment')
   })
 
-  it('dispatch save when clicking button', () => {
+  it('dispatch save with count', () => {
     wrapper.find('button.save').trigger('click')
     expect(store.dispatch).toHaveBeenCalledOnce()
-    expect(store.dispatch).toHaveBeenCalledWith('save', { name: 'Eduardo' })
+    expect(store.dispatch).toHaveBeenCalledWith('save', { count: 0 })
   })
 })
 ```
@@ -127,6 +161,8 @@ Store getters. You can directly modify it to change a value:
 ```js
 store.getters.upperCaseName = 'JEFF'
 ```
+
+ℹ️ _Why no functions?_: if you provide a function to a getter, you're reimplementing it. During a test, you know the value, you should be able to provide it directly and be **completely sure** about the value that will be used in the component you are testing.
 
 #### `reset`
 
