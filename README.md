@@ -193,6 +193,7 @@ new Store({
     reset: spy => spy.restore(),
   },
 })
+```
 
 ### `commit` & `dispatch`
 
@@ -209,4 +210,3 @@ Spies. Dependent on the testing framework
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
-```
