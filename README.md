@@ -105,7 +105,7 @@ const store = new Store({
 
 ### Modules
 
-To mock modules `state`, simply provide a nested object for `state`:
+To mock module's `state`, simply provide a nested object for `state`:
 
 ```js
 new Store({
@@ -118,6 +118,17 @@ new Store({
     moduleB: {
       value: 'bar',
     },
+  },
+})
+```
+
+To mock module's `getters`, provide the correct name when namespaced:
+
+```js
+new Store({
+  getters: {
+    'namespaced/getter': 'value',
+    notNamespaced: 'value',
   },
 })
 ```
