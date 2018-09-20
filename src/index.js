@@ -19,9 +19,9 @@ exports.Store = class Store {
     this._modulesNamespaceMap = new Proxy(
       {},
       {
-        // always return the root store as the context module
         get: (target, key) => {
-          if (typeof key !== 'string') return Reflect.get(this, key)
+          // for Symbols
+          if (typeof key !== 'string') return Reflect.get(target, key)
 
           const modules = key.split('/')
           // modules always have a trailing /
@@ -44,13 +44,16 @@ exports.Store = class Store {
 
             return {
               context: {
+                // make sure we reuse this proxy
                 _modulesNamespaceMap: this._modulesNamespaceMap,
+                // pass the right state
                 state,
+                // getters are not nested
                 getters: this.getters,
               },
             }
           } else {
-            return Reflect.get(this, key)
+            return Reflect.get(target, key)
           }
         },
       }
@@ -58,6 +61,7 @@ exports.Store = class Store {
   }
 
   _initialize () {
+    // getters is a plain object
     this.getters = { ...this.__initialGetters }
     this.state = clone(this.__initialState)
   }
