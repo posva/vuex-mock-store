@@ -14,7 +14,7 @@ yarn add -D vuex-mock-store
 
 ## Usage
 
-ℹ️: _All examples use [Jest](#TODO) API_. See [below](#Providing-custom-spies) to use a different mock library.
+ℹ️: _All examples use [Jest](https://jestjs.io) API_. See [below](#providing-custom-spies) to use a different mock library.
 
 Usage with [vue-test-utils](https://github.com/vuejs/vue-test-utils):
 
@@ -144,7 +144,7 @@ You can [modify](#state) the `state` and `getters` directly for any test. Callin
 - `options`
   - `state`: initial state object, _default_: `{}`
   - `getters`: getters object, _default_: `{}`
-  - `spy`: interface to create spies. [details below](#Providing-custom-spies)
+  - `spy`: interface to create spies. [details below](#providing-custom-spies)
 
 #### `state`
 
