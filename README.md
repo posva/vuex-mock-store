@@ -48,6 +48,8 @@ export default {
 </script>
 ```
 
+You can test interactions without relying on the behaviour of your actions and mutations:
+
 ```js
 import { Store } from 'vuex-mock-store'
 import { mount } from '@vue/test-utils'
