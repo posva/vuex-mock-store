@@ -1,4 +1,4 @@
-# vuex-mock-store [![Build Status](https://badgen.net/circleci/github/posva/vuex-mock-store)](https://circleci.com/gh/posva/vuex-mock-store) [![npm package](https://badgen.net/npm/v/vuex-mock-store)](https://www.npmjs.com/package/vuex-mock-store) [![coverage](https://badgen.net/codecov/c/github/posva/vuex-mock-store)](https://codecov.io/github/posva/vuex-mock-store) [![thanks](https://img.shields.io/badge/thanks-%E2%99%A5-ff69b4.svg)](https://github.com/posva/thanks)
+# vuex-mock-store [![Build Status](https://badgen.net/circleci/github/posva/vuex-mock-store)](https://circleci.com/gh/posva/vuex-mock-store) [![npm package](https://badgen.net/npm/v/vuex-mock-store)](https://www.npmjs.com/package/vuex-mock-store) [![coverage](https://badgen.net/codecov/c/github/posva/vuex-mock-store)](https://codecov.io/github/posva/vuex-mock-store) [![thanks](https://img.shields.io/badge/thanks-%E2%99%A5-ff69b4.svg)](https://github.com/posva/thanks) [![Greenkeeper badge](https://badges.greenkeeper.io/posva/vuex-mock-store.svg)](https://greenkeeper.io/)
 
 > Simple and straightforward mock for Vuex v3.x Store
 
