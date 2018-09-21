@@ -1,3 +1,4 @@
+// @ts-check
 const { Store } = require('../src')
 const Helper = require('./Helper')
 const { mount } = require('@vue/test-utils')
@@ -5,10 +6,11 @@ const { mapState } = require('vuex')
 
 describe('Store Mock', () => {
   it('work with no args', () => {
-    let store
     expect(() => {
-      store = new Store()
+      // eslint-disable-next-line no-new
+      new Store()
     }).not.toThrow()
+    const store = new Store()
     expect(store.state).toEqual({})
     expect(store.getters).toEqual({})
   })
