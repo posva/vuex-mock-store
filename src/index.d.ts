@@ -23,7 +23,7 @@ export class Store<S extends Dict = {}, G extends Dict = {}, Spy = jest.Mock> {
   private _spy: SpyCreator<S>
   private _modulesNamespaceMap: any
 
-  constructor(options: StoreConstructorOptions<S, G, Spy>)
+  constructor(options?: StoreConstructorOptions<S, G, Spy>)
 
   reset(): void
   private _initialize(): void
