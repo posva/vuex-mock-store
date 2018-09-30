@@ -88,6 +88,14 @@ describe('MyComponent.vue', () => {
 })
 ```
 
+⚠️ The mocked `dispatch` method returns `undefined` insteadf of a Promise. If you rely on this, you will have to call the appropriate function to make the `dispatch` spy return a Promise:
+
+```js
+store.dispatch.mockReturnValue(Promise.resolve(42))
+```
+
+If you are using Jest, you can check the documentation [here](https://jestjs.io/docs/en/mock-function-api#mockfnmockreturnvaluevalue)
+
 ### Initial state and getters
 
 You can provide a `getters`, and `state` object to mock them:
