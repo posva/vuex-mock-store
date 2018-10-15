@@ -20,7 +20,7 @@ export class Store<S extends Dict = {}, G extends Dict = {}, Spy = jest.Mock> {
   getters: G
   private _initialGetters: G
   private _initialState: S
-  private _spy: SpyCreator<S>
+  private _spy: SpyCreator<Spy>
   private _modulesNamespaceMap: any
 
   constructor(options?: StoreConstructorOptions<S, G, Spy>)
