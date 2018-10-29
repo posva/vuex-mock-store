@@ -11,7 +11,7 @@ const defaultSpy = {
 
 exports.spy = defaultSpy
 
-const getNestedState = ({ state, modules, key }) => {
+function getNestedState ({ state, modules, key }) {
   let _state = state
   for (let module of modules) {
     if (_state[module]) _state = _state[module]
