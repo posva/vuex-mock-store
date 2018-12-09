@@ -9,7 +9,7 @@
     "email": "posva13@gmail.com"
   },
   "scripts": {
-    "lint": "eslint --color --ext=js,html src test",
+    "lint": "eslint --color --ext=js,html src tests",
     "unit": "jest",
     "dev": "npm run unit -- --watchAll",
     "test": "npm run lint && npm run unit"
@@ -34,14 +34,14 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^23.3.2",
-    "@vue/test-utils": "^1.0.0-beta.25",
+    "@types/jest": "^23.3.10",
+    "@vue/test-utils": "^1.0.0-beta.26",
     "codecov": "^3.1.0",
-    "eslint": "^5.6.0",
-    "eslint-config-posva": "^2.0.1",
+    "eslint": "^5.10.0",
+    "eslint-config-posva": "^2.0.3",
     "jest": "^23.6.0",
-    "vue": "^2.5.17",
-    "vue-template-compiler": "^2.5.17",
+    "vue": "^2.5.18",
+    "vue-template-compiler": "^2.5.18",
     "vuex": "^3.0.1"
   },
   "repository": {
@@ -58,13 +58,10 @@
       "json",
       "vue"
     ],
-    "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
-    },
     "coveragePathIgnorePatterns": [
-      "<rootDir>/test/*.js",
-      "<rootDir>/test/.*.js",
-      "<rootDir>/test/*/*.js"
+      "<rootDir>/tests/*.js",
+      "<rootDir>/tests/.*.js",
+      "<rootDir>/tests/*/*.js"
     ]
   },
   "homepage": "https://github.com/posva/vuex-mock-store#readme",
