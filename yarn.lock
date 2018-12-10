@@ -1762,9 +1762,9 @@ has@^1.0.1:
     function-bind "^1.1.1"
 
 he@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
-  integrity sha1-k0EP0hsAlzUVH4howvJx80J+I/0=
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
+  integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
 home-or-tmp@^2.0.0:
   version "2.0.0"
@@ -4218,17 +4218,17 @@ vue-eslint-parser@^3.2.1:
     lodash "^4.17.10"
 
 vue-template-compiler@^2.5.18:
-  version "2.5.18"
-  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.5.18.tgz#8a346e477c5ada6efc890a2db4857090a2c54a05"
-  integrity sha512-WG2G+r5YxqkbTyJnbpkJuISTVI9MvYNGAZVKnmn8S4AoP0R0OufIKrHEV+GKwilLa+p3t/Plo8FzJXdhL9m4Sw==
+  version "2.5.19"
+  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.5.19.tgz#c23fcbea22fe6c116814141d2e6680023d6456f2"
+  integrity sha512-SIoE8gvl0UjZ/wccwHhj0HUqL+kLkJNy/8v7TXElz6rqxqKOKLoAynVV4L78qHZOHhLoyRl5BOmUFQPPdcD5qw==
   dependencies:
     de-indent "^1.0.2"
     he "^1.1.0"
 
 vue@^2.5.18:
-  version "2.5.18"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.18.tgz#885586eda5c8efc77140a497500b73620e53c1dd"
-  integrity sha512-j4oT4jQdhBf3dUxzu1ogjkhzMU44AtwqtLz7oq/u7340/lmUUogTG6/D6P4/J2cCosoM21MqMIUsQchPKS4elg==
+  version "2.5.19"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.19.tgz#c4c9ba01a97a23ea24018d4702e994c15785e025"
+  integrity sha512-zs7w/dy/yMTCcUunUl05UHhYEI2bt67R7G2jD42HnJ28JxCtC1FY8zZ9GU4PF2SJP8Ff/B9HyojWk/NztqKfFA==
 
 vuex@^3.0.1:
   version "3.0.1"
