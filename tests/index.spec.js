@@ -57,19 +57,20 @@ describe('Store Mock', () => {
   })
 
   describe('using Helper', () => {
-    const mocks = {
-      $store: new Store({
-        state: {
-          counter: 0,
-          module: { mCounter: 1, nested: { mmCounter: 3 } },
-        },
+    const store = new Store({
+      state: {
+        counter: 0,
+        module: { mCounter: 1, nested: { mmCounter: 3 } },
+      },
 
-        getters: {
-          getter: 1,
-          // getter: (...args) => (console.log(...args), 1),
-          'mdolue/mGetter': () => 2,
-        },
-      }),
+      getters: {
+        getter: 1,
+        // getter: (...args) => (console.log(...args), 1),
+        'mdolue/mGetter': () => 2,
+      },
+    })
+    const mocks = {
+      $store: store,
     }
 
     it('works', () => {
@@ -83,6 +84,15 @@ describe('Store Mock', () => {
       expect(wrapper.vm.mmCounter).toBe(3)
 
       expect(wrapper.vm.getter).toBe(1)
+
+      wrapper.vm.action('a')
+      expect(store.dispatch).toHaveBeenCalledWith('action', 'a')
+      wrapper.vm.mAction('b')
+      expect(store.dispatch).toHaveBeenCalledWith('module/mAction', 'b')
+      wrapper.vm.mutation('c')
+      expect(store.commit).toHaveBeenCalledWith('mutation', 'c')
+      wrapper.vm.mMutation('d')
+      expect(store.commit).toHaveBeenCalledWith('module/mMutation', 'd')
     })
 
     it('throws with non-defined state', () => {
