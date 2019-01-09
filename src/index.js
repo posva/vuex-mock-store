@@ -57,14 +57,10 @@ exports.Store = class Store {
 
           return {
             context: {
-              dispatch: (...args) => {
-                args[0] = key + args[0]
-                this.dispatch(...args)
-              },
-              commit: (...args) => {
-                args[0] = key + args[0]
-                this.commit(...args)
-              },
+              dispatch: (name, ...args) =>
+                this.dispatch(key + name, ...args),
+              commit: (name, ...args) =>
+                this.commit(key + name, ...args),
               // make sure we reuse this proxy
               _modulesNamespaceMap: this._modulesNamespaceMap,
               // pass the right state
