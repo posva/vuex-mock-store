@@ -66,33 +66,51 @@ describe('Store Mock', () => {
       getters: {
         getter: 1,
         // getter: (...args) => (console.log(...args), 1),
-        'mdolue/mGetter': () => 2,
+        'module/mGetter': 2,
+        'module/nested/mmGetter': 3,
       },
     })
-    const mocks = {
-      $store: store,
-    }
+    const mocks = { $store: store }
+    /** @type {import('@vue/test-utils').Wrapper} */
+    let wrapper
+    beforeEach(() => {
+      wrapper = mount(Helper, { mocks })
+    })
 
-    it('works', () => {
-      /** @type {import('@vue/test-utils').Wrapper<Helper>} */
-      let wrapper
-      expect(() => {
-        wrapper = mount(Helper, { mocks })
-      }).not.toThrow()
+    it('correctly maps state', () => {
       expect(wrapper.vm.counter).toBe(0)
       expect(wrapper.vm.mCounter).toBe(1)
       expect(wrapper.vm.mmCounter).toBe(3)
+    })
 
+    it('correctly maps getters', () => {
       expect(wrapper.vm.getter).toBe(1)
+      expect(wrapper.vm.mGetter).toBe(2)
+      expect(wrapper.vm.mmGetter).toBe(3)
+    })
 
+    it('triggers mapped actions', () => {
       wrapper.vm.action('a')
       expect(store.dispatch).toHaveBeenCalledWith('action', 'a')
       wrapper.vm.mAction('b')
       expect(store.dispatch).toHaveBeenCalledWith('module/mAction', 'b')
+      wrapper.vm.mNestedAction('b')
+      expect(store.dispatch).toHaveBeenCalledWith(
+        'module/nested/mNestedAction',
+        'b'
+      )
+    })
+
+    it('triggers mapped commit', () => {
       wrapper.vm.mutation('c')
       expect(store.commit).toHaveBeenCalledWith('mutation', 'c')
       wrapper.vm.mMutation('d')
       expect(store.commit).toHaveBeenCalledWith('module/mMutation', 'd')
+      wrapper.vm.mNestedMutation('e')
+      expect(store.commit).toHaveBeenCalledWith(
+        'module/nested/mNestedMutation',
+        'e'
+      )
     })
 
     it('throws with non-defined state', () => {

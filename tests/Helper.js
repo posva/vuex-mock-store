@@ -13,8 +13,10 @@ module.exports = {
   methods: {
     ...mapMutations(['mutation']),
     ...mapMutations('module', ['mMutation']),
+    ...mapMutations('module/nested', ['mNestedMutation']),
     ...mapActions(['action']),
     ...mapActions('module', ['mAction']),
+    ...mapActions('module/nested', ['mNestedAction']),
   },
 
   render: () => null,
