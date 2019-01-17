@@ -13,11 +13,6 @@ const defaultSpy = {
    * @param {jest.Mock} spy
    */
   reset: spy => spy.mockReset(),
-  /**
-   * @param {jest.Mock} spy
-   * @param {(...args: any[]) => any} fn implementation
-   */
-  mockImplementation: (spy, fn) => spy.mockImplementation(fn),
 }
 
 /** @typedef {typeof defaultSpy} SpyFactory */
