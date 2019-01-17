@@ -16,8 +16,7 @@
   },
   "files": [
     "src",
-    "LICENSE",
-    "README.md"
+    "LICENSE"
   ],
   "keywords": [
     "vue",
