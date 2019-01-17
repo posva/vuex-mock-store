@@ -15,4 +15,13 @@ describe('Store subscriptions', () => {
       state
     )
   })
+
+  it('resets subscriptions on reset', () => {
+    const store = new Store()
+    const spy = jest.fn()
+    store.subscribe(spy)
+    store.reset()
+    store.commit('mutation', 'payload')
+    expect(spy).not.toHaveBeenCalled()
+  })
 })
