@@ -1,6 +1,9 @@
 // @ts-check
 const clone = require('lodash.clonedeep')
 
+/** @typedef {Record<string, any>} StateTree */
+/** @typedef {Record<string, any>} GettersMock */
+
 const defaultSpy = {
   /**
    * @param {(...args: any[]) => any} [fn] implementation
@@ -17,8 +20,15 @@ const defaultSpy = {
   mockImplementation: (spy, fn) => spy.mockImplementation(fn),
 }
 
+/** @typedef {typeof defaultSpy} SpyFactory */
+
 exports.spy = defaultSpy
 
+/**
+ * Retrieve the nested state based on a path of modules
+ * @param {{ state: StateTree, modules: string[], key: string }} options
+ * @returns {StateTree}
+ */
 function getNestedState ({ state, modules, key }) {
   let _state = state
   for (let module of modules) {
@@ -36,7 +46,16 @@ function getNestedState ({ state, modules, key }) {
 }
 
 exports.Store = class Store {
-  constructor ({ getters = {}, state = {}, spy = defaultSpy } = {}) {
+  /**
+   * @param {{ getters: GettersMock, state: StateTree, spy: SpyFactory }} options
+   */
+  constructor (
+    { getters = {}, state = {}, spy = defaultSpy } = {
+      getters: {},
+      state: {},
+      spy: defaultSpy,
+    }
+  ) {
     this._spy = spy
     this.commit = this._spy.create(this._triggerSubscriptions.bind(this))
     this.dispatch = this._spy.create()
@@ -68,7 +87,15 @@ exports.Store = class Store {
 
           return {
             context: {
+              /**
+               * @param {string} name
+               * @param {any[]} args
+               */
               dispatch: (name, ...args) => this.dispatch(key + name, ...args),
+              /**
+               * @param {string} name
+               * @param {any[]} args
+               */
               commit: (name, ...args) => this.commit(key + name, ...args),
               // make sure we reuse this proxy
               _modulesNamespaceMap: this._modulesNamespaceMap,
@@ -89,19 +116,30 @@ exports.Store = class Store {
     this.state = clone(this._initialState)
   }
 
+  /**
+   * Resets the store as if it was just created. Should be called before or after each test
+   */
   reset () {
     this._spy.reset(this.dispatch)
     this._spy.reset(this.commit)
     this._initialize()
   }
 
+  /**
+   * @param {Function} handler callback to call when a mutation is committed
+   * @returns {() => void} unsubscribe
+   */
   subscribe (handler) {
     this._handlers.push(handler)
     return () => {
-      this._handlers.splice(this._handlers.findIndex(handler), 1)
+      this._handlers.splice(this._handlers.indexOf(handler), 1)
     }
   }
 
+  /**
+   * @param {string} type name of the mutation
+   * @param {*} [payload] payload passed to the mutation
+   */
   _triggerSubscriptions (type, payload) {
     this._handlers.forEach(fn => fn({ type, payload }, this.state))
   }
