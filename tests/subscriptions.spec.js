@@ -24,4 +24,13 @@ describe('Store subscriptions', () => {
     store.commit('mutation', 'payload')
     expect(spy).not.toHaveBeenCalled()
   })
+
+  it('returns an unsubscribe callback', () => {
+    const store = new Store()
+    const spy = jest.fn()
+    const unsubscribe = store.subscribe(spy)
+    unsubscribe()
+    store.commit('mutation', 'payload')
+    expect(spy).not.toHaveBeenCalled()
+  })
 })
