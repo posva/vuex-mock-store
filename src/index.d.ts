@@ -22,9 +22,13 @@ export class Store<S extends Dict = {}, G extends Dict = {}, Spy = jest.Mock> {
   private _initialState: S
   private _spy: SpyCreator<Spy>
   private _modulesNamespaceMap: any
+  private _handlers: Function[]
 
   constructor(options?: StoreConstructorOptions<S, G, Spy>)
 
   reset(): void
   private _initialize(): void
+
+  subscribe(handler: Function): () => void
+  private _triggerSubscriptions(type: string, payload: any): void
 }
