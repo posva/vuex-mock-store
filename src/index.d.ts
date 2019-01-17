@@ -22,7 +22,8 @@ export class Store<S extends Dict = {}, G extends Dict = {}, Spy = jest.Mock> {
   private _initialState: S
   private _spy: SpyCreator<Spy>
   private _modulesNamespaceMap: any
-  private _handlers: Function[]
+  private _mutationsHandlers: Function[]
+  private _actionsHandlers: Function[]
 
   constructor(options?: StoreConstructorOptions<S, G, Spy>)
 
@@ -30,5 +31,7 @@ export class Store<S extends Dict = {}, G extends Dict = {}, Spy = jest.Mock> {
   private _initialize(): void
 
   subscribe(handler: Function): () => void
-  private _triggerSubscriptions(type: string, payload: any): void
+  subscribeAction(handler: Function): () => void
+  private _triggerMutationSubscriptions(type: string, payload: any): void
+  private _triggerActionSubscriptions(type: string, payload: any): void
 }

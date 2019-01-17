@@ -52,13 +52,25 @@ exports.Store = class Store {
     }
   ) {
     this._spy = spy
-    this.commit = this._spy.create(this._triggerSubscriptions.bind(this))
-    this.dispatch = this._spy.create()
-    this._initialGetters = getters
-    this._initialState = state
-    this._initialize()
+    // next few lines are for the sake of typings
+    // TODO: find a way of removing them
+    this.commit = this._spy.create(
+      this._triggerMutationSubscriptions.bind(this)
+    )
+    this.dispatch = this._spy.create(
+      this._triggerActionSubscriptions.bind(this)
+    )
+
+    this.getters = this._initialGetters = getters
+    this.state = this._initialState = state
+
     /** @type {Function[]} */
-    this._handlers = []
+    this._mutationsHandlers = []
+    /** @type {Function[]} */
+    this._actionsHandlers = []
+
+    // actually clone the state, reset the getters
+    this._initialize()
 
     // this is necessary for map* helpers
     /** @type {any} */
@@ -109,14 +121,20 @@ exports.Store = class Store {
     // getters is a plain object
     this.getters = { ...this._initialGetters }
     this.state = clone(this._initialState)
+    this._mutationsHandlers = []
+    this._actionsHandlers = []
   }
 
   /**
    * Resets the store as if it was just created. Should be called before or after each test
    */
   reset () {
-    this._spy.reset(this.dispatch)
-    this._spy.reset(this.commit)
+    this.commit = this._spy.create(
+      this._triggerMutationSubscriptions.bind(this)
+    )
+    this.dispatch = this._spy.create(
+      this._triggerActionSubscriptions.bind(this)
+    )
     this._initialize()
   }
 
@@ -125,9 +143,23 @@ exports.Store = class Store {
    * @returns {() => void} unsubscribe
    */
   subscribe (handler) {
-    this._handlers.push(handler)
+    this._mutationsHandlers.push(handler)
     return () => {
-      this._handlers.splice(this._handlers.indexOf(handler), 1)
+      this._mutationsHandlers.splice(
+        this._mutationsHandlers.indexOf(handler),
+        1
+      )
+    }
+  }
+
+  /**
+   * @param {Function} handler callback to call when an action is dispatched
+   * @returns {() => void} unsubscribe
+   */
+  subscribeAction (handler) {
+    this._actionsHandlers.push(handler)
+    return () => {
+      this._actionsHandlers.splice(this._actionsHandlers.indexOf(handler), 1)
     }
   }
 
@@ -135,7 +167,15 @@ exports.Store = class Store {
    * @param {string} type name of the mutation
    * @param {*} [payload] payload passed to the mutation
    */
-  _triggerSubscriptions (type, payload) {
-    this._handlers.forEach(fn => fn({ type, payload }, this.state))
+  _triggerMutationSubscriptions (type, payload) {
+    this._mutationsHandlers.forEach(fn => fn({ type, payload }, this.state))
+  }
+
+  /**
+   * @param {string} type name of the mutation
+   * @param {*} [payload] payload passed to the mutation
+   */
+  _triggerActionSubscriptions (type, payload) {
+    this._actionsHandlers.forEach(fn => fn({ type, payload }, this.state))
   }
 }
