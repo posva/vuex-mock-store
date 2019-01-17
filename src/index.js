@@ -9,10 +9,6 @@ const defaultSpy = {
    * @param {(...args: any[]) => any} [fn] implementation
    */
   create: fn => jest.fn(fn),
-  /**
-   * @param {jest.Mock} spy
-   */
-  reset: spy => spy.mockReset(),
 }
 
 /** @typedef {typeof defaultSpy} SpyFactory */

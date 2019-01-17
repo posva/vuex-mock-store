@@ -191,16 +191,17 @@ Reset `commit` and `dispatch` spies and restore `getters` and `state` to their i
 
 #### Providing custom spies
 
-By default, the Store will call `jest.fn()` to create the spies. This will throw an error if you are using `mocha` or any other test framework that isn't Jest. In that situation, you will have to provide an interface to _create_ and _reset_ spies. This is the default interface that uses `jest.fn()`:
+By default, the Store will call `jest.fn()` to create the spies. This will throw an error if you are using `mocha` or any other test framework that isn't Jest. In that situation, you will have to provide an interface to _create_ spies. This is the default interface that uses `jest.fn()`:
 
 ```js
 new Store({
   spy: {
     create: handler => jest.fn(handler),
-    reset: spy => spy.mockRestore(),
   },
 })
 ```
+
+The handler is an optional argument that mocks the implementation of the spy.
 
 If you use Jest, you don't need to do anything.
 If you are using something else like [Sinon](https://sinonjs.org), you could provide this interface:
@@ -211,7 +212,6 @@ import sinon from 'sinon'
 new Store({
   spy: {
     create: handler => sinon.spy(handler),
-    reset: spy => spy.restore(),
   },
 })
 ```

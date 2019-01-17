@@ -4,7 +4,6 @@ type Dict = Record<string, any>
 
 interface SpyCreator<S> {
   create: () => S
-  reset: (spy: S) => any
 }
 
 interface StoreConstructorOptions<S extends Dict, G extends Dict, Spy> {
