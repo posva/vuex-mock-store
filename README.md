@@ -2,7 +2,7 @@
 
 > Simple and straightforward mock for Vuex v3.x Store
 
-Supports using `mapMutations` and `mapActions` as well as directly doing `this.$store.commit()` and `this.$store.dispatch()`
+Automatically creates spies on `commit` and `dispatch` so you can focus on testing your component without executing your store code.
 
 ## Installation
 
