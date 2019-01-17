@@ -27,7 +27,7 @@ Given a component `MyComponent.vue`:
     <p class="doubleCount">{{ doubleCount }}</p>
     <button class="increment" @click="increment">+</button>
     <button class="decrement" @click="decrement">-</button>
-    <hr/>
+    <hr />
     <button class="save" @click="save({ count })">Save</button>
   </div>
 </template>
@@ -196,7 +196,7 @@ By default, the Store will call `jest.fn()` to create the spies. This will throw
 ```js
 new Store({
   spy: {
-    create: () => jest.fn(),
+    create: handler => jest.fn(handler),
     reset: spy => spy.mockRestore(),
   },
 })
@@ -210,7 +210,7 @@ import sinon from 'sinon'
 
 new Store({
   spy: {
-    create: () => sinon.spy(),
+    create: handler => sinon.spy(handler),
     reset: spy => spy.restore(),
   },
 })
