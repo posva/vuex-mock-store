@@ -220,7 +220,7 @@ new Store({
 
 Spies. Dependent on the testing framework
 
-- [jest.fn](#https://jestjs.io/docs/en/mock-function-api)
+- [jest.fn](https://jestjs.io/docs/en/jest-object#jestfnimplementation)
 - [sinon.spy](https://sinonjs.org/releases/v6.3.4/spies)
 
 ## Related
