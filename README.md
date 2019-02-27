@@ -113,44 +113,103 @@ const store = new Store({
 
 ### Modules
 
-To mock module's `state`, simply provide a nested object for `state`:
+#### State
+
+To mock module's `state`, provide a nested object in `state` with the same name of the module. As if you were writing the state yourself:
 
 ```js
 new Store({
   state: {
+    value: 'from root',
     moduleA: {
+      value: 'from A',
       moduleC: {
-        value: 'foo',
+        value: 'from A/C',
       },
     },
     moduleB: {
-      value: 'bar',
+      value: 'from B',
     },
   },
 })
 ```
 
-To mock module's `getters`, provide the correct name when namespaced:
+That will cover the following calls:
+
+```js
+import { mapState } from 'vuex'
+
+mapState(['value']) // from root
+mapState('moduleA', ['value']) // from A
+mapState('moduleB', ['value']) // from B
+mapState('moduleA/moduleC', ['value']) // from C
+```
+
+_When testing `state`, it doesn't change anything for the module to be namespaced or not_
+
+#### Getters
+
+To mock module's `getters`, provide the correct based on whether the module is _namespaced_ or not. Given the following modules:
+
+```js
+const moduleA = {
+  namespaced: true,
+
+  getters: {
+    getter: () => 'from A',
+  },
+
+  // nested modules
+  modules: {
+    moduleC: {
+      namespaced: true,
+      getter: () => 'from A/C',
+    },
+    moduleD: {
+      // not namespaced!
+      getter: () => 'from A/D',
+    },
+  },
+}
+
+const moduleB = {
+  // not namespaced
+  getters: {
+    getter: () => 'from B',
+  },
+}
+
+new Vuex.Store({ modules: { moduleA, moduleC } })
+```
+
+We need to use the following getters:
 
 ```js
 new Store({
   getters: {
-    'namespaced/getter': 'value',
-    notNamespaced: 'value',
+    getter: 'from root',
+    'moaduleA/getter': 'from A',
+    'moaduleA/moduleC/getter': 'from A/C',
+    'moaduleA/getter': 'from A/D', // moduleD isn't namespaced
+    'moaduleB/getter': 'from B',
   },
 })
 ```
 
-Testing actions and mutations depend whether your [modules are namespaced](https://vuex.vuejs.org/guide/modules.html#namespacing) or not. If they are namespaced, make sure to provide the full action/mutation name:
+#### Actions/Mutations
+
+As with _getters_, testing actions and mutations depends whether your [modules are namespaced](https://vuex.vuejs.org/guide/modules.html#namespacing) or not. If they are namespaced, make sure to provide the full action/mutation name:
 
 ```js
 // namespaced module
 expect(store.commit).toHaveBeenCalledWith('moduleA/setValue')
 expect(store.dispatch).toHaveBeenCalledWith('moduleA/postValue')
-// non-namespaced
+// non-namespaced, but could be inside of a module
 expect(store.commit).toHaveBeenCalledWith('setValue')
 expect(store.dispatch).toHaveBeenCalledWith('postValue')
 ```
+
+_Refer to the module example below using `getters` for a more detailed example, even though it is using only `getters`, it's exactly the same for `actions` and `mutations_`
 
 ### Mutating `state`, providing custom `getters`
 
