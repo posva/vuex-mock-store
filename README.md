@@ -149,7 +149,7 @@ _When testing `state`, it doesn't change anything for the module to be namespace
 
 #### Getters
 
-To mock module's `getters`, provide the correct based on whether the module is _namespaced_ or not. Given the following modules:
+To mock module's `getters`, provide the correct name based on whether the module is _namespaced_ or not. Given the following modules:
 
 ```js
 const moduleA = {
