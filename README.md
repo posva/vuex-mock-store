@@ -209,7 +209,7 @@ expect(store.commit).toHaveBeenCalledWith('setValue')
 expect(store.dispatch).toHaveBeenCalledWith('postValue')
 ```
 
-_Refer to the module example below using `getters` for a more detailed example, even though it is using only `getters`, it's exactly the same for `actions` and `mutations_`
+_Refer to the module example below using `getters` for a more detailed example, even though it is using only `getters`, it's exactly the same for `actions` and `mutations`_
 
 ### Mutating `state`, providing custom `getters`
 
