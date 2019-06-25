@@ -38,7 +38,7 @@
     "@vue/test-utils": "^1.0.0-beta.29",
     "codecov": "^3.3.0",
     "eslint": "^5.16.0",
-    "eslint-config-posva": "^2.0.3",
+    "eslint-config-posva": "^3.0.1",
     "jest": "^24.7.1",
     "vue": "^2.6.10",
     "vue-template-compiler": "^2.6.10",
