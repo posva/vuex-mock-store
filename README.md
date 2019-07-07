@@ -88,7 +88,7 @@ describe('MyComponent.vue', () => {
 })
 ```
 
-⚠️ The mocked `dispatch` method returns `undefined` insteadf of a Promise. If you rely on this, you will have to call the appropriate function to make the `dispatch` spy return a Promise:
+⚠️ The mocked `dispatch` method returns `undefined` instead of a Promise. If you rely on this, you will have to call the appropriate function to make the `dispatch` spy return a Promise:
 
 ```js
 store.dispatch.mockReturnValue(Promise.resolve(42))
