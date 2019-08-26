@@ -114,8 +114,8 @@ describe('Store Mock', () => {
     })
 
     it('throws with non-defined state', () => {
-      /** @type {import('@vue/test-utils').Wrapper<Helper>} */
-      let wrapper = mount(
+      /** @type {import('@vue/test-utils').Wrapper<typeof Helper>} */
+      const wrapper = mount(
         {
           render: () => null,
           computed: mapState('nonExistent', ['a']),
