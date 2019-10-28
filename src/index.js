@@ -28,8 +28,8 @@ function getNestedState ({ state, modules, key }) {
       throw new Error(
         `[vuex-mock-store] module "${key.slice(
           0,
-          -1
-        )}" not defined in state:\n${JSON.stringify(state, null, 2)}`
+          -1,
+        )}" not defined in state:\n${JSON.stringify(state, null, 2)}`,
       )
     }
   }
@@ -45,16 +45,16 @@ exports.Store = class Store {
       getters: {},
       state: {},
       spy: defaultSpy,
-    }
+    },
   ) {
     this._spy = spy
     // next few lines are for the sake of typings
     // TODO: find a way of removing them
     this.commit = this._spy.create(
-      this._triggerMutationSubscriptions.bind(this)
+      this._triggerMutationSubscriptions.bind(this),
     )
     this.dispatch = this._spy.create(
-      this._triggerActionSubscriptions.bind(this)
+      this._triggerActionSubscriptions.bind(this),
     )
 
     this.getters = this._initialGetters = getters
@@ -109,7 +109,7 @@ exports.Store = class Store {
             },
           }
         },
-      }
+      },
     )
   }
 
@@ -126,10 +126,10 @@ exports.Store = class Store {
    */
   reset () {
     this.commit = this._spy.create(
-      this._triggerMutationSubscriptions.bind(this)
+      this._triggerMutationSubscriptions.bind(this),
     )
     this.dispatch = this._spy.create(
-      this._triggerActionSubscriptions.bind(this)
+      this._triggerActionSubscriptions.bind(this),
     )
     this._initialize()
   }
@@ -143,7 +143,7 @@ exports.Store = class Store {
     return () => {
       this._mutationsHandlers.splice(
         this._mutationsHandlers.indexOf(handler),
-        1
+        1,
       )
     }
   }

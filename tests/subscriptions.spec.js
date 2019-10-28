@@ -11,7 +11,7 @@ describe('Store subscriptions', () => {
     expect(spy).toHaveBeenCalledTimes(1)
     expect(spy).toHaveBeenCalledWith(
       { type: 'mutation', payload: 'payload' },
-      {}
+      {},
     )
   })
 
@@ -64,11 +64,11 @@ describe('Store subscriptions', () => {
     expect(action).toHaveBeenCalledTimes(1)
     expect(mutation).toHaveBeenCalledWith(
       { type: 'mutation', payload: 'payload' },
-      {}
+      {},
     )
     expect(action).toHaveBeenCalledWith(
       { type: 'action', payload: 'payload' },
-      {}
+      {},
     )
   })
 

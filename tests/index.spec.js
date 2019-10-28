@@ -97,7 +97,7 @@ describe('Store Mock', () => {
       wrapper.vm.mNestedAction('b')
       expect(store.dispatch).toHaveBeenCalledWith(
         'module/nested/mNestedAction',
-        'b'
+        'b',
       )
     })
 
@@ -109,7 +109,7 @@ describe('Store Mock', () => {
       wrapper.vm.mNestedMutation('e')
       expect(store.commit).toHaveBeenCalledWith(
         'module/nested/mNestedMutation',
-        'e'
+        'e',
       )
     })
 
@@ -120,7 +120,7 @@ describe('Store Mock', () => {
           render: () => null,
           computed: mapState('nonExistent', ['a']),
         },
-        { mocks }
+        { mocks },
       )
       expect(() => {
         // eslint-disable-next-line no-unused-expressions
