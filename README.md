@@ -188,10 +188,10 @@ We need to use the following getters:
 new Store({
   getters: {
     getter: 'from root',
-    'moaduleA/getter': 'from A',
-    'moaduleA/moduleC/getter': 'from A/C',
-    'moaduleA/getter': 'from A/D', // moduleD isn't namespaced
-    'moaduleB/getter': 'from B',
+    'moduleA/getter': 'from A',
+    'moduleA/moduleC/getter': 'from A/C',
+    'moduleA/getter': 'from A/D', // moduleD isn't namespaced
+    'moduleB/getter': 'from B',
   },
 })
 ```
