@@ -115,7 +115,7 @@ exports.Store = class Store {
 
   _initialize () {
     // getters is a plain object
-    this.getters = { ...this._initialGetters }
+    this.getters = clone(this._initialGetters)
     this.state = clone(this._initialState)
     this._mutationsHandlers = []
     this._actionsHandlers = []

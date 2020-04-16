@@ -31,6 +31,14 @@ describe('Store Mock', () => {
     expect(store.state.nested).toEqual(state.nested)
   })
 
+  it('deeply copies the getters', () => {
+    const getters = { nested: { n: 0 } }
+    const store = new Store({ getters })
+
+    expect(store.getters.nested).not.toBe(getters.nested)
+    expect(store.getters.nested).toEqual(getters.nested)
+  })
+
   it('copies getters', () => {
     const getters = { getter: 0 }
     const store = new Store({ getters })
