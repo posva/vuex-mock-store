@@ -56,10 +56,10 @@ describe('Store Mock', () => {
   })
 
   it('resets nested getters', () => {
-    let getters = { positions: {} }
-    let store = new Store({ getters })
+    const getters = { positions: {} }
+    const store = new Store({ getters })
     // @ts-ignore
-    store.getters.positions['x'] = 3
+    store.getters.positions.x = 3
     store.reset()
     expect(store.getters.positions).toStrictEqual({})
   })
