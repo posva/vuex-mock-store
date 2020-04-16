@@ -55,6 +55,15 @@ describe('Store Mock', () => {
     expect(store.getters.n).toBe(0)
   })
 
+  it('resets nested getters', () => {
+    let getters = { positions: {} }
+    let store = new Store({ getters })
+    // @ts-ignore
+    store.getters.positions['x'] = 3
+    store.reset()
+    expect(store.getters.positions).toStrictEqual({})
+  })
+
   it('resets the state', () => {
     const state = { n: 0 }
     const store = new Store({ state })
