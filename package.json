@@ -69,6 +69,6 @@
     "lodash.clonedeep": "^4.5.0"
   },
   "peerDependencies": {
-    "@types/jest": ">=24.9.1"
+    "@types/jest": ">=26.0.24"
   }
 }
