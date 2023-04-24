@@ -42,7 +42,7 @@
     "jest": "^26.6.3",
     "vue": "^2.7.14",
     "vue-template-compiler": "^2.7.14",
-    "vuex": "^3.6.2"
+    "vuex": "^4.1.0"
   },
   "repository": {
     "type": "git",
