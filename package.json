@@ -64,7 +64,10 @@
       "<rootDir>/tests/.*.js",
       "<rootDir>/tests/*/*.js"
     ],
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "testEnvironmentOptions": {
+      "customExportConditions": ["node", "node-addons"]
+    }
   },
   "homepage": "https://github.com/posva/vuex-mock-store#readme",
   "dependencies": {
