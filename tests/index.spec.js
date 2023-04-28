@@ -74,7 +74,7 @@ describe('Store Mock', () => {
     /** @type {import('@vue/test-utils').Wrapper} */
     let wrapper
     beforeEach(() => {
-      wrapper = mount(Helper, { mocks })
+      wrapper = mount(Helper, { global: { mocks } })
     })
 
     it('correctly maps state', () => {
@@ -120,7 +120,7 @@ describe('Store Mock', () => {
           render: () => null,
           computed: mapState('nonExistent', ['a']),
         },
-        { mocks },
+        { global: { mocks } },
       )
       expect(() => {
         // eslint-disable-next-line no-unused-expressions
