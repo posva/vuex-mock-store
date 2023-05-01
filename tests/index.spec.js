@@ -2,7 +2,20 @@
 const { Store } = require('../src')
 const Helper = require('./Helper')
 const { mount } = require('@vue/test-utils')
+const Vue = require('vue')
 const { mapState } = require('vuex')
+
+/**
+ * @param {{ store: Store }} options
+ */
+function vue2CompatibleMocks ({ store }) {
+  const mocks = { $store: store }
+  if (Vue.version < '3') {
+    return { mocks }
+  }
+
+  return { global: { mocks } }
+}
 
 describe('Store Mock', () => {
   it('work with no args', () => {
@@ -70,11 +83,10 @@ describe('Store Mock', () => {
         'module/nested/mmGetter': 3,
       },
     })
-    const mocks = { $store: store }
     /** @type {import('@vue/test-utils').Wrapper} */
     let wrapper
     beforeEach(() => {
-      wrapper = mount(Helper, { global: { mocks } })
+      wrapper = mount(Helper, vue2CompatibleMocks({ store }))
     })
 
     it('correctly maps state', () => {
@@ -120,7 +132,7 @@ describe('Store Mock', () => {
           render: () => null,
           computed: mapState('nonExistent', ['a']),
         },
-        { global: { mocks } },
+        vue2CompatibleMocks({ store }),
       )
       expect(() => {
         // eslint-disable-next-line no-unused-expressions

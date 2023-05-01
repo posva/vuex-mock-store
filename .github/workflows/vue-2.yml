@@ -1,0 +1,17 @@
+on:
+  - pull_request
+  - push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn add --dev vue@2 vuex@3 @vue/test-utils@1
+      - run: yarn test
+      - uses: codecov/codecov-action@v3
