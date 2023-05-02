@@ -1,6 +1,6 @@
 # vuex-mock-store [![Build Status](https://badgen.net/circleci/github/posva/vuex-mock-store)](https://circleci.com/gh/posva/vuex-mock-store) [![npm package](https://badgen.net/npm/v/vuex-mock-store)](https://www.npmjs.com/package/vuex-mock-store) [![coverage](https://badgen.net/codecov/c/github/posva/vuex-mock-store)](https://codecov.io/github/posva/vuex-mock-store) [![thanks](https://img.shields.io/badge/thanks-%E2%99%A5-ff69b4.svg)](https://github.com/posva/thanks)
 
-> Simple and straightforward mock for Vuex v3.x Store
+> Simple and straightforward mock for Vuex v3.x and v4.x Store
 
 Automatically creates spies on `commit` and `dispatch` so you can focus on testing your component without executing your store code.
 
@@ -88,7 +88,8 @@ const store = new Store({
 })
 // add other mocks here so they are accessible in every component
 const mocks = {
-  $store: store,
+  global: { $store: store },
+  // for Vue 2.x: just { $store: store } without global
 }
 
 // reset spies, initial state and getters
