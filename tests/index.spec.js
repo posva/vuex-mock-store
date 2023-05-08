@@ -3,14 +3,17 @@ const { Store } = require('../src')
 const Helper = require('./Helper')
 const { mount } = require('@vue/test-utils')
 const Vue = require('vue')
-const { mapState } = require('vuex')
+const { mapState, useStore } = require('vuex')
+
+const isVue3 = Vue.version.startsWith('3.')
+const onlyVue3 = isVue3 ? it : it.skip
 
 /**
  * @param {{ store: Store }} options
  */
 function vue2CompatibleMocks ({ store }) {
   const mocks = { $store: store }
-  if (Vue.version < '3') {
+  if (!isVue3) {
     return { mocks }
   }
 
@@ -139,5 +142,31 @@ describe('Store Mock', () => {
         wrapper.vm.a
       }).toThrow(/module "nonExistent" not defined in state/)
     })
+  })
+
+  onlyVue3('supports composition API', () => {
+    const wrapper = mount(
+      {
+        setup () {
+          const store = useStore()
+          return {
+            composition: Vue.computed(() => store.state.composition),
+          }
+        },
+        render: () => null,
+      },
+      {
+        global: {
+          provide: {
+            store: new Store({
+              state: {
+                composition: 'api',
+              },
+            }),
+          },
+        },
+      },
+    )
+    expect(wrapper.vm.composition).toBe('api')
   })
 })
