@@ -2,7 +2,23 @@
 const { Store } = require('../src')
 const Helper = require('./Helper')
 const { mount } = require('@vue/test-utils')
-const { mapState } = require('vuex')
+const Vue = require('vue')
+const { mapState, useStore } = require('vuex')
+
+const isVue3 = Vue.version.startsWith('3.')
+const onlyVue3 = isVue3 ? it : it.skip
+
+/**
+ * @param {{ store: Store }} options
+ */
+function vue2CompatibleMocks ({ store }) {
+  const mocks = { $store: store }
+  if (!isVue3) {
+    return { mocks }
+  }
+
+  return { global: { mocks } }
+}
 
 describe('Store Mock', () => {
   it('work with no args', () => {
@@ -70,11 +86,10 @@ describe('Store Mock', () => {
         'module/nested/mmGetter': 3,
       },
     })
-    const mocks = { $store: store }
     /** @type {import('@vue/test-utils').Wrapper} */
     let wrapper
     beforeEach(() => {
-      wrapper = mount(Helper, { mocks })
+      wrapper = mount(Helper, vue2CompatibleMocks({ store }))
     })
 
     it('correctly maps state', () => {
@@ -120,12 +135,38 @@ describe('Store Mock', () => {
           render: () => null,
           computed: mapState('nonExistent', ['a']),
         },
-        { mocks },
+        vue2CompatibleMocks({ store }),
       )
       expect(() => {
         // eslint-disable-next-line no-unused-expressions
         wrapper.vm.a
       }).toThrow(/module "nonExistent" not defined in state/)
     })
+  })
+
+  onlyVue3('supports composition API', () => {
+    const wrapper = mount(
+      {
+        setup () {
+          const store = useStore()
+          return {
+            composition: Vue.computed(() => store.state.composition),
+          }
+        },
+        render: () => null,
+      },
+      {
+        global: {
+          provide: {
+            store: new Store({
+              state: {
+                composition: 'api',
+              },
+            }),
+          },
+        },
+      },
+    )
+    expect(wrapper.vm.composition).toBe('api')
   })
 })
