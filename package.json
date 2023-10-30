@@ -41,8 +41,8 @@
     "eslint-config-posva": "^4.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "vue": "^3.3.6",
-    "vue-template-compiler": "^2.7.14",
+    "vue": "^3.3.7",
+    "vue-template-compiler": "^2.7.15",
     "vuex": "^4.1.0"
   },
   "repository": {
