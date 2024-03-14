@@ -14,4 +14,4 @@ jobs:
       - run: yarn install
       - run: yarn add --dev vue@2 vuex@3 @vue/test-utils@1
       - run: yarn test
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4
