@@ -33,7 +33,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^29.5.13",
+    "@types/jest": "^29.5.14",
     "@types/lodash.clonedeep": "^4.5.9",
     "@vue/test-utils": "^2.4.6",
     "codecov": "^3.8.3",
