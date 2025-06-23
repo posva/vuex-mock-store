@@ -39,9 +39,9 @@
     "codecov": "^3.8.3",
     "eslint": "^8.57.1",
     "eslint-config-posva": "^4.0.0",
-    "jest": "^30.0.0",
-    "jest-environment-jsdom": "^30.0.0",
-    "vue": "^3.5.16",
+    "jest": "^30.0.2",
+    "jest-environment-jsdom": "^30.0.2",
+    "vue": "^3.5.17",
     "vue-template-compiler": "^2.7.16",
     "vuex": "^4.1.0"
   },
