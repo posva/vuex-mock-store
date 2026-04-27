@@ -35,13 +35,13 @@
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/lodash.clonedeep": "^4.5.9",
-    "@vue/test-utils": "^2.4.6",
+    "@vue/test-utils": "^2.4.8",
     "codecov": "^3.8.3",
     "eslint": "^8.57.1",
     "eslint-config-posva": "^4.0.0",
     "jest": "^30.3.0",
     "jest-environment-jsdom": "^30.3.0",
-    "vue": "^3.5.32",
+    "vue": "^3.5.33",
     "vue-template-compiler": "^2.7.16",
     "vuex": "^4.1.0"
   },
