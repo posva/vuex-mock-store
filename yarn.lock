@@ -1383,10 +1383,10 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.5.33.tgz#b41070039e91d2921edb4c38cbcc80f498a24f3a"
   integrity sha512-5vR2QIlmaLG77Ygd4pMP6+SGQ5yox9VhtnbDWTy9DzMzdmeLxZ1QqxrywEZ9sa1AVubfIJyaCG3ytyWU81ufcQ==
 
-"@vue/test-utils@^2.4.8":
-  version "2.4.8"
-  resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-2.4.8.tgz#f832a7b3245c7d7477079698a4633d0448fb6d34"
-  integrity sha512-cjAKFbSXFhtZ9Cj+ug60b21lW/BN737e+Syu2LPACIW6R0zVtj65Fnfe649KjfHor3Etx3ZavDFFBrZ+p21YNw==
+"@vue/test-utils@^2.4.10":
+  version "2.4.10"
+  resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-2.4.10.tgz#f3b006e03918e66b5df1f2a6f7f5200663b525d3"
+  integrity sha512-SmoZ5EA1kYiAFs9NkYdiFFQF+cSnUwnvlYEbY+DogWQZUiqOm/Y29eSbc5T6yi75SgSF9863SBeXniIEoPajCA==
   dependencies:
     js-beautify "^1.14.9"
     vue-component-type-helpers "^3.0.0"
