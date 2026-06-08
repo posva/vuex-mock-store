@@ -35,7 +35,7 @@
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/lodash.clonedeep": "^4.5.9",
-    "@vue/test-utils": "^2.4.10",
+    "@vue/test-utils": "^2.4.11",
     "codecov": "^3.8.3",
     "eslint": "^8.57.1",
     "eslint-config-posva": "^4.0.0",
